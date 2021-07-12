@@ -11,6 +11,8 @@ import torch.optim as optim
 # Imports for layer types.
 from proto.python.proto.layers.layers_pb2 import ModelLayers, Layer
 
+from decoder.decoder import ProtoDecoder
+
 class Net(nn.Module):
     """
     A sample neural network, utilizing simple layers.
@@ -35,10 +37,45 @@ class ProtoEncoder:
     """
     An encoder class that takes a model, encodes its layers and parameters 
     """
-    def __init__(self, model: nn.Module, optim: optim, loss) -> None:
+    def __init__(self, model: nn.Module, optim: optim = None, loss = None) -> None:
         self.model = model
         self.optim = optim
         self.loss = loss
+
+    def encode_layer(self, layer:nn.Module, layers:ModelLayers) -> Layer:
+        """
+        A function to encode individual layers of a PyTorch model
+
+        Args:
+            layer (nn.Module): The layer that is to be encoded using Protobuf
+
+        Returns:
+            Layer: Encoded layer type for the input layer
+        """
+        # creates a new layer to be added to collection
+        layer_proto = Layer()
+
+        # based on layer type, set the Layer instance's type and features 
+        if isinstance(layer, nn.Linear):
+            layer_proto.type.append(Layer.LayerType.LINEAR)
+            lin_layer = layers.LinearLayer()
+            lin_layer.inFeatures.append(layer.in_features)
+            lin_layer.outFeatures.append(layer.out_features)
+            layers.linearLayers.append(lin_layer)
+        elif isinstance(layer, nn.ReLU):
+            layer_proto.type.append(Layer.LayerType.RELU)
+            relu_layer = layers.ReLULayer()
+            relu_layer.inPlace.append(layer.inplace)
+            layers.reluLayers.append(relu_layer)
+        elif isinstance(layer, nn.LogSoftmax):
+            layer_proto.type.append(Layer.LayerType.LOGSOFTMAX)
+            logsoftmax_layer = layers.LogSoftmaxLayer()
+            logsoftmax_layer.dim.append(layer.dim)
+            layers.logsoftmaxLayers.append(logsoftmax_layer)
+        else:
+            print(f"Warning: Layer {layer} does not have a ProtoBuf Mapping. Program will exit.")
+            exit(1)
+        return layer_proto
 
     def encode_model_layers(self) -> str:
         """
@@ -50,59 +87,21 @@ class ProtoEncoder:
         """
         layers = ModelLayers()
         for layer in self.model.children():
-            # creates a new layer to be added to collection
-            layer_proto = layers.layers.add() 
-
-            # based on layer type, set the Layer instance's type and features 
-            if isinstance(layer, nn.Linear):
-                layer_proto.type = Layer.LayerType.LINEAR
-                layer_proto.LinearLayer.inFeatures = layer.in_features
-                layer_proto.LinearLayer.outFeatures = layer.out_features
-                layer_proto.LinearLayer.bias = bool(layer.bias)
-            elif isinstance(layer, nn.ReLU):
-                layer_proto.type = Layer.LayerType.RELU
-                layer_proto.ReLULayer.inPlace = layer.inplace
-            elif isinstance(layer, nn.LogSoftmax):
-                layer_proto.type = Layer.LayerType.LOGSOFTMAX
-                layer_proto.LogSoftmaxLayer.dim = layer.dim
-            else:
-                print(f"Warning: Layer {layer} does not have a ProtoBuf Mapping. Program will exit.")
-                exit(1)
+            encoded_layer = self.encode_layer(layer, layers)
+            layers.layers.append(encoded_layer)
         return layers.SerializeToString()
 
-
 if __name__ == "__main__":
-    # model = Net()
-    # # we need to send model.state_dict() and module information from model.children()
+    model = Net() 
+    encoder = ProtoEncoder(model)
+    stringified_model = encoder.encode_model_layers()
 
-    # # model.state_dict() can be encoded directly as a dictionary
-    # for key in model.state_dict().keys():
-    #     print(key)
-    #     print(model.state_dict()[key])
-    #     break
+    decoder = ProtoDecoder(stringified_model)
+    module_list = decoder.decode_model_layers()
+    print(module_list)
 
-    # # model.children() can be encoded with their own protos, each proto corresponding to a layer
-    # for layer in model.children():
-    #     print(layer)
-    #     print(f"{isinstance(layer, nn.Linear)}\n")
-    #     print(layer.in_features)
-    #     print(layer.out_features)
-    #     break
-    layers = ModelLayers()
-    #print(layers)
-    layer_proto = layers.layers.add() 
-    #print(layer_proto)
-    layer_proto.type = Layer.LayerType.RELU
-    layer_proto.LinearLayer.inFeatures = 10
-    layer_proto.LinearLayer.outFeatures = 15
-    layer_proto.LinearLayer.bias = True
-    #print(layer_proto)
-    string = layers.SerializeToString()
-    record = ModelLayers()
-    record.ParseFromString(string)
-    for layer in record.layers:
-        print(layer.type)
-        print(layer.LinearLayer.inFeatures)
+
+
 
     
 

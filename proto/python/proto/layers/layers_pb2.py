@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x19proto/layers/layers.proto\"\xde\x01\n\x05Layer\x12\x1e\n\x04type\x18\x01 \x01(\x0e\x32\x10.Layer.LayerType\x1a\x44\n\x0bLinearLayer\x12\x12\n\ninFeatures\x18\x01 \x01(\x05\x12\x13\n\x0boutFeatures\x18\x02 \x01(\x05\x12\x0c\n\x04\x62ias\x18\x03 \x01(\x08\x1a\x1c\n\tReLULayer\x12\x0f\n\x07inPlace\x18\x01 \x01(\x08\x1a\x1e\n\x0fLogSoftmaxLayer\x12\x0b\n\x03\x64im\x18\x01 \x01(\x05\"1\n\tLayerType\x12\n\n\x06LINEAR\x10\x00\x12\x08\n\x04RELU\x10\x01\x12\x0e\n\nLOGSOFTMAX\x10\x02\"%\n\x0bModelLayers\x12\x16\n\x06layers\x18\x01 \x03(\x0b\x32\x06.Layerb\x06proto3'
+  serialized_pb=b'\n\x19proto/layers/layers.proto\"Z\n\x05Layer\x12\x1e\n\x04type\x18\x01 \x03(\x0e\x32\x10.Layer.LayerType\"1\n\tLayerType\x12\n\n\x06LINEAR\x10\x00\x12\x08\n\x04RELU\x10\x01\x12\x0e\n\nLOGSOFTMAX\x10\x02\"\xaf\x02\n\x0bModelLayers\x12\x16\n\x06layers\x18\x01 \x03(\x0b\x32\x06.Layer\x12.\n\x0clinearLayers\x18\x02 \x03(\x0b\x32\x18.ModelLayers.LinearLayer\x12*\n\nreluLayers\x18\x03 \x03(\x0b\x32\x16.ModelLayers.ReLULayer\x12\x36\n\x10logsoftmaxLayers\x18\x04 \x03(\x0b\x32\x1c.ModelLayers.LogSoftmaxLayer\x1a\x36\n\x0bLinearLayer\x12\x12\n\ninFeatures\x18\x01 \x03(\x05\x12\x13\n\x0boutFeatures\x18\x02 \x03(\x05\x1a\x1c\n\tReLULayer\x12\x0f\n\x07inPlace\x18\x01 \x03(\x08\x1a\x1e\n\x0fLogSoftmaxLayer\x12\x0b\n\x03\x64im\x18\x01 \x03(\x05\x62\x06proto3'
 )
 
 
@@ -49,118 +49,11 @@ _LAYER_LAYERTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=203,
-  serialized_end=252,
+  serialized_start=70,
+  serialized_end=119,
 )
 _sym_db.RegisterEnumDescriptor(_LAYER_LAYERTYPE)
 
-
-_LAYER_LINEARLAYER = _descriptor.Descriptor(
-  name='LinearLayer',
-  full_name='Layer.LinearLayer',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='inFeatures', full_name='Layer.LinearLayer.inFeatures', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='outFeatures', full_name='Layer.LinearLayer.outFeatures', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='bias', full_name='Layer.LinearLayer.bias', index=2,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=71,
-  serialized_end=139,
-)
-
-_LAYER_RELULAYER = _descriptor.Descriptor(
-  name='ReLULayer',
-  full_name='Layer.ReLULayer',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='inPlace', full_name='Layer.ReLULayer.inPlace', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=141,
-  serialized_end=169,
-)
-
-_LAYER_LOGSOFTMAXLAYER = _descriptor.Descriptor(
-  name='LogSoftmaxLayer',
-  full_name='Layer.LogSoftmaxLayer',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='dim', full_name='Layer.LogSoftmaxLayer.dim', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=171,
-  serialized_end=201,
-)
 
 _LAYER = _descriptor.Descriptor(
   name='Layer',
@@ -172,15 +65,15 @@ _LAYER = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='type', full_name='Layer.type', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
+      number=1, type=14, cpp_type=8, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
-  nested_types=[_LAYER_LINEARLAYER, _LAYER_RELULAYER, _LAYER_LOGSOFTMAXLAYER, ],
+  nested_types=[],
   enum_types=[
     _LAYER_LAYERTYPE,
   ],
@@ -190,22 +83,29 @@ _LAYER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=30,
-  serialized_end=252,
+  serialized_start=29,
+  serialized_end=119,
 )
 
 
-_MODELLAYERS = _descriptor.Descriptor(
-  name='ModelLayers',
-  full_name='ModelLayers',
+_MODELLAYERS_LINEARLAYER = _descriptor.Descriptor(
+  name='LinearLayer',
+  full_name='ModelLayers.LinearLayer',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='layers', full_name='ModelLayers.layers', index=0,
-      number=1, type=11, cpp_type=10, label=3,
+      name='inFeatures', full_name='ModelLayers.LinearLayer.inFeatures', index=0,
+      number=1, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='outFeatures', full_name='ModelLayers.LinearLayer.outFeatures', index=1,
+      number=2, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -222,57 +122,174 @@ _MODELLAYERS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=254,
-  serialized_end=291,
+  serialized_start=309,
+  serialized_end=363,
 )
 
-_LAYER_LINEARLAYER.containing_type = _LAYER
-_LAYER_RELULAYER.containing_type = _LAYER
-_LAYER_LOGSOFTMAXLAYER.containing_type = _LAYER
+_MODELLAYERS_RELULAYER = _descriptor.Descriptor(
+  name='ReLULayer',
+  full_name='ModelLayers.ReLULayer',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='inPlace', full_name='ModelLayers.ReLULayer.inPlace', index=0,
+      number=1, type=8, cpp_type=7, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=365,
+  serialized_end=393,
+)
+
+_MODELLAYERS_LOGSOFTMAXLAYER = _descriptor.Descriptor(
+  name='LogSoftmaxLayer',
+  full_name='ModelLayers.LogSoftmaxLayer',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='dim', full_name='ModelLayers.LogSoftmaxLayer.dim', index=0,
+      number=1, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=395,
+  serialized_end=425,
+)
+
+_MODELLAYERS = _descriptor.Descriptor(
+  name='ModelLayers',
+  full_name='ModelLayers',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='layers', full_name='ModelLayers.layers', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='linearLayers', full_name='ModelLayers.linearLayers', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='reluLayers', full_name='ModelLayers.reluLayers', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='logsoftmaxLayers', full_name='ModelLayers.logsoftmaxLayers', index=3,
+      number=4, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[_MODELLAYERS_LINEARLAYER, _MODELLAYERS_RELULAYER, _MODELLAYERS_LOGSOFTMAXLAYER, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=122,
+  serialized_end=425,
+)
+
 _LAYER.fields_by_name['type'].enum_type = _LAYER_LAYERTYPE
 _LAYER_LAYERTYPE.containing_type = _LAYER
+_MODELLAYERS_LINEARLAYER.containing_type = _MODELLAYERS
+_MODELLAYERS_RELULAYER.containing_type = _MODELLAYERS
+_MODELLAYERS_LOGSOFTMAXLAYER.containing_type = _MODELLAYERS
 _MODELLAYERS.fields_by_name['layers'].message_type = _LAYER
+_MODELLAYERS.fields_by_name['linearLayers'].message_type = _MODELLAYERS_LINEARLAYER
+_MODELLAYERS.fields_by_name['reluLayers'].message_type = _MODELLAYERS_RELULAYER
+_MODELLAYERS.fields_by_name['logsoftmaxLayers'].message_type = _MODELLAYERS_LOGSOFTMAXLAYER
 DESCRIPTOR.message_types_by_name['Layer'] = _LAYER
 DESCRIPTOR.message_types_by_name['ModelLayers'] = _MODELLAYERS
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Layer = _reflection.GeneratedProtocolMessageType('Layer', (_message.Message,), {
-
-  'LinearLayer' : _reflection.GeneratedProtocolMessageType('LinearLayer', (_message.Message,), {
-    'DESCRIPTOR' : _LAYER_LINEARLAYER,
-    '__module__' : 'proto.layers.layers_pb2'
-    # @@protoc_insertion_point(class_scope:Layer.LinearLayer)
-    })
-  ,
-
-  'ReLULayer' : _reflection.GeneratedProtocolMessageType('ReLULayer', (_message.Message,), {
-    'DESCRIPTOR' : _LAYER_RELULAYER,
-    '__module__' : 'proto.layers.layers_pb2'
-    # @@protoc_insertion_point(class_scope:Layer.ReLULayer)
-    })
-  ,
-
-  'LogSoftmaxLayer' : _reflection.GeneratedProtocolMessageType('LogSoftmaxLayer', (_message.Message,), {
-    'DESCRIPTOR' : _LAYER_LOGSOFTMAXLAYER,
-    '__module__' : 'proto.layers.layers_pb2'
-    # @@protoc_insertion_point(class_scope:Layer.LogSoftmaxLayer)
-    })
-  ,
   'DESCRIPTOR' : _LAYER,
   '__module__' : 'proto.layers.layers_pb2'
   # @@protoc_insertion_point(class_scope:Layer)
   })
 _sym_db.RegisterMessage(Layer)
-_sym_db.RegisterMessage(Layer.LinearLayer)
-_sym_db.RegisterMessage(Layer.ReLULayer)
-_sym_db.RegisterMessage(Layer.LogSoftmaxLayer)
 
 ModelLayers = _reflection.GeneratedProtocolMessageType('ModelLayers', (_message.Message,), {
+
+  'LinearLayer' : _reflection.GeneratedProtocolMessageType('LinearLayer', (_message.Message,), {
+    'DESCRIPTOR' : _MODELLAYERS_LINEARLAYER,
+    '__module__' : 'proto.layers.layers_pb2'
+    # @@protoc_insertion_point(class_scope:ModelLayers.LinearLayer)
+    })
+  ,
+
+  'ReLULayer' : _reflection.GeneratedProtocolMessageType('ReLULayer', (_message.Message,), {
+    'DESCRIPTOR' : _MODELLAYERS_RELULAYER,
+    '__module__' : 'proto.layers.layers_pb2'
+    # @@protoc_insertion_point(class_scope:ModelLayers.ReLULayer)
+    })
+  ,
+
+  'LogSoftmaxLayer' : _reflection.GeneratedProtocolMessageType('LogSoftmaxLayer', (_message.Message,), {
+    'DESCRIPTOR' : _MODELLAYERS_LOGSOFTMAXLAYER,
+    '__module__' : 'proto.layers.layers_pb2'
+    # @@protoc_insertion_point(class_scope:ModelLayers.LogSoftmaxLayer)
+    })
+  ,
   'DESCRIPTOR' : _MODELLAYERS,
   '__module__' : 'proto.layers.layers_pb2'
   # @@protoc_insertion_point(class_scope:ModelLayers)
   })
 _sym_db.RegisterMessage(ModelLayers)
+_sym_db.RegisterMessage(ModelLayers.LinearLayer)
+_sym_db.RegisterMessage(ModelLayers.ReLULayer)
+_sym_db.RegisterMessage(ModelLayers.LogSoftmaxLayer)
 
 
 # @@protoc_insertion_point(module_scope)

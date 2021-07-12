@@ -7,23 +7,30 @@ message Layer {
         LOGSOFTMAX = 2;
     }
 
-    LayerType type = 1;
-
-    message LinearLayer {
-        int32 inFeatures = 1;
-        int32 outFeatures = 2;
-        bool bias = 3;
-    }
-
-    message ReLULayer {
-        bool inPlace = 1;
-    }
-
-    message LogSoftmaxLayer {
-        int32 dim = 1;
-    }
+    repeated LayerType type = 1;
 }
 
 message ModelLayers {
     repeated Layer layers = 1;
+
+    repeated LinearLayer linearLayers = 2;
+     
+    repeated ReLULayer reluLayers = 3;
+
+    repeated LogSoftmaxLayer logsoftmaxLayers = 4;
+
+    message LinearLayer {
+        repeated int32 inFeatures = 1;
+        repeated int32 outFeatures = 2;
+    }
+
+    message ReLULayer {
+        repeated bool inPlace = 1;
+    }
+
+    message LogSoftmaxLayer {
+        repeated int32 dim = 1;
+    }
+
 }
+
