@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+message Layer {
+    enum LayerType {
+        LINEAR = 0;
+        RELU = 1;
+        LOGSOFTMAX = 2;
+    }
+
+    LayerType type = 1;
+
+    message LinearLayer {
+        int32 inFeatures = 1;
+        int32 outFeatures = 2;
+        bool bias = 3;
+    }
+
+    message ReLULayer {
+        bool inPlace = 1;
+    }
+
+    message LogSoftmaxLayer {
+        int32 dim = 1;
+    }
+}
+
+message ModelLayers {
+    repeated Layer layers = 1;
+}
