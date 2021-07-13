@@ -10,28 +10,8 @@ import torch.optim as optim
 
 # Imports for layer types.
 from proto.python.proto.layers.layers_pb2 import ModelLayers, Layer
-
+from server import Net
 from decoder.decoder import ProtoDecoder
-
-class Net(nn.Module):
-    """
-    A sample neural network, utilizing simple layers.
-
-    Inherits from - nn.Module
-    """
-    def __init__(self):
-        super(Net, self).__init__()
-        self.hidden = nn.Linear(28*28, 512)
-        self.sigmoid = nn.ReLU()
-        self.output = nn.Linear(512, 10)
-        self.softmax = nn.LogSoftmax(dim=1)
-    
-    def forward(self, x):
-        x = self.hidden(x)
-        x = self.sigmoid(x)
-        x = self.output(x)
-        x = self.softmax(x)
-        return x
 
 class ProtoEncoder:
     """
