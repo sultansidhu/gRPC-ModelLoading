@@ -40,7 +40,7 @@ class ModelEncodeService(pb2_grpc.ModelEncodeServicer):
         self.model = model
         self.encoder = ProtoEncoder(self.model)
 
-    def GetServerResponse(self, request, context):
+    def GetEncodedModel(self, request, context):
         start_time = time.time()
         encoded_model = self.encoder.encode_model_layers()
         result = {'model': encoded_model, 'received': True}

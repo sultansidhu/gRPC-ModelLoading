@@ -11,6 +11,6 @@ message Request{
 }
 
 message ModelResponse{
-    string model = 1;
+    bytes model = 1;
     bool received = 2;
 }
