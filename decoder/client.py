@@ -2,7 +2,7 @@ import grpc
 import proto.python.proto.service.service_pb2_grpc as pb2_grpc
 import proto.python.proto.service.service_pb2 as pb2
 
-from decoder.decoder import ProtoDecoder
+from decoder import ProtoDecoder
 
 
 class ModelEncodeClient(object):
@@ -25,8 +25,8 @@ class ModelEncodeClient(object):
         """
         Client function to call the rpc for GetServerResponse
         """
-        message = pb2.Message(message=message)
-        response = self.stub.GetServerResponse(message)
+        message = pb2.Request(message=message)
+        response = self.stub.GetEncodedModel(message)
         print(response)
         encoded_model = response.model
         decoder = ProtoDecoder(encoded_model)
