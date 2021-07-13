@@ -60,3 +60,18 @@ class ProtoDecoder:
         assert layer_counter == len(model_layers)
         return model_layers
 
+
+if __name__ == "__main__":
+    class Hello:
+        def __init__(self) -> None:
+            pass
+        def forward(self, x):
+            return x + 2
+    
+    def forward4(x):
+        return x + 3
+    h = Hello()
+    print(h.forward(2))
+    h.forward = forward4
+    print(h.forward(2))
+

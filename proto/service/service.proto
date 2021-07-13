@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package service;
+
+service ModelEncode {
+    rpc GetEncodedModel(Request) returns (ModelResponse) {}
+}
+
+message Request{
+    string message = 1;
+}
+
+message ModelResponse{
+    string model = 1;
+    bool received = 2;
+}
