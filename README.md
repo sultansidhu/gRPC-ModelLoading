@@ -10,10 +10,10 @@
 - ML Framework agonostic
 ### Components 
 **Note: For now, development will focus on simple PyTorch models only**
-- Component to encode proto files for the state dictionary of model 
-- Component to encode proto files for the peripheral model information, that stores model library, model layer names, etc.
-- Component to take in a given PyTorch model, generate the previous two files from it 
+- Component to encode proto files for the state dictionary of model (PROBLEMATIC)
+- Component to encode proto files for the peripheral model information, that stores model library, model layer names, etc. (DONE)
+- Component to take in a given PyTorch model, generate the previous two files from it (DONE)
 - Component to send the data over a network using gRPC 
-- Component to send the receive, parse the data over a network
-- Component to restructure the model on the client side 
+- Component to receive, parse the data over a network
+- Component to restructure the model on the client side (IN PROGRESS)
 **This list is subject to change**
