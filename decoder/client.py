@@ -27,7 +27,6 @@ class ModelEncodeClient(object):
         """
         message = pb2.Request(message=message)
         response = self.stub.GetEncodedModel(message)
-        print(response)
         encoded_model = response.model
         decoder = ProtoDecoder(encoded_model)
         return decoder.decode_model_layers()
