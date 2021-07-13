@@ -13,7 +13,7 @@
 - Component to encode proto files for the state dictionary of model (PROBLEMATIC)
 - Component to encode proto files for the peripheral model information, that stores model library, model layer names, etc. (DONE)
 - Component to take in a given PyTorch model, generate the previous two files from it (DONE)
-- Component to send the data over a network using gRPC 
-- Component to receive, parse the data over a network
+- Component to send the data over a network using gRPC (DONE)
+- Component to receive, parse the data over a network (DONE)
 - Component to restructure the model on the client side (IN PROGRESS)
 **This list is subject to change**
