@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from proto.python.proto.service import service_pb2 as proto_dot_service_dot_service__pb2
+from proto.service import service_pb2 as proto_dot_service_dot_service__pb2
 
 
 class ModelEncodeStub(object):
