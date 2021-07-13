@@ -11,7 +11,7 @@ import proto.python.proto.service.service_pb2_grpc as pb2_grpc
 import proto.python.proto.service.service_pb2 as pb2
 
 # importing encoder to encode model, and send
-from encoder.encoder import ProtoEncoder
+from encoder import ProtoEncoder
 
 
 class Net(nn.Module):
@@ -46,7 +46,7 @@ class ModelEncodeService(pb2_grpc.ModelEncodeServicer):
         result = {'model': encoded_model, 'received': True}
         end_time = time.time()
         print(f"Time taken for returning response - {end_time - start_time}")
-        return pb2.MessageResponse(**result)
+        return pb2.ModelResponse(**result)
 
 
 def serve():
@@ -55,6 +55,7 @@ def serve():
     pb2_grpc.add_ModelEncodeServicer_to_server(ModelEncodeService(net), server)
     server.add_insecure_port('[::]:8888')
     server.start()
+    print("Server started...")
     server.wait_for_termination()
 
 

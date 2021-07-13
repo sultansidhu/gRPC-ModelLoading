@@ -10,7 +10,6 @@ import torch.optim as optim
 
 # Imports for layer types.
 from proto.python.proto.layers.layers_pb2 import ModelLayers, Layer
-from server import Net
 from decoder.decoder import ProtoDecoder
 
 class ProtoEncoder:
@@ -71,14 +70,6 @@ class ProtoEncoder:
             layers.layers.append(encoded_layer)
         return layers.SerializeToString()
 
-if __name__ == "__main__":
-    model = Net() 
-    encoder = ProtoEncoder(model)
-    stringified_model = encoder.encode_model_layers()
-
-    decoder = ProtoDecoder(stringified_model)
-    module_list = decoder.decode_model_layers()
-    print(module_list)
 
 
 
