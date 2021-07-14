@@ -38,4 +38,4 @@ if __name__ == '__main__':
     client = ModelEncodeClient()
     decoded_model = client.get_url(message="") # empty message, since the server does not need it
     onnx.onnx.checker.check_model(decoded_model)
-    print("model decoded!")
+    print("ONNX model checked and decoded!")
