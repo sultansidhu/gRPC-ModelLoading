@@ -36,6 +36,4 @@ class ModelEncodeClient(object):
 if __name__ == '__main__':
     client = ModelEncodeClient()
     decoded_model = client.get_url(message="") # empty message, since the server does not need it
-    for layer in decoded_model:
-        print(layer)
-        print("\n")
+    print(decoded_model)

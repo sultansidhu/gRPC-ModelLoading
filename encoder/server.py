@@ -25,7 +25,7 @@ class Net(nn.Module):
         self.hidden = nn.Linear(28*28, 512)
         self.sigmoid = nn.ReLU()
         self.output = nn.Linear(512, 10)
-        self.softmax = nn.LogSoftmax(dim=1)
+        self.softmax = nn.Softmax(dim=1)
     
     def forward(self, x):
         x = self.hidden(x)
