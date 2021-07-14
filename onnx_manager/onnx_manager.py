@@ -9,7 +9,6 @@ import torch
 import torch.nn as nn
 import torch.onnx
 import onnx
-from typing import Union
 from onnx2pytorch import ConvertModel
 
 
@@ -43,7 +42,7 @@ class ONNXManager:
     def __init__(self) -> None:
         pass
 
-    def encode(self, model: nn.Module, dummy_input: torch.Tensor) -> Union(bytes, None):
+    def encode(self, model: nn.Module, dummy_input: torch.Tensor):
         """
         The chief function for encoding a PyTorch model. 
 
@@ -64,7 +63,7 @@ class ONNXManager:
             os.remove(path)
             return converted_model
     
-    def decode(self, model: bytes) -> nn.Module:
+    def decode(self, model: bytes):
         """
         Function for decoding the received bytestring of the encoded ONNX model. 
         Decodes it back into a PyTorch model. 
