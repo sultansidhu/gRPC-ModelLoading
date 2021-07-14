@@ -5,6 +5,7 @@ them over a network using gRPC.
 """
 # module imports
 from collections import OrderedDict
+from torch import onnx
 
 # torch imports
 import torch.nn as nn
@@ -13,6 +14,7 @@ import torch.optim as optim
 
 # Imports for layer types.
 from proto.python.proto.layers.layers_pb2 import ModelLayers, Layer
+from onnx_manager.onnx_manager import ONNXManager
 
 class ProtoDecoder:
     """
@@ -21,6 +23,7 @@ class ProtoDecoder:
     """
     def __init__(self, encoded_model: str) -> None:
         self.encoded_model = encoded_model
+        self.manager = ONNXManager()
     
     def decode_model_layers(self) -> OrderedDict:
         """
@@ -29,36 +32,37 @@ class ProtoDecoder:
         Returns:
             OrderedDict: Returns an ordered dictionary of the module layers involved within the model.
         """
-        # initialize the layer list, parse the string
-        model_layers = []
-        encoded_layers = ModelLayers()
-        encoded_layers.ParseFromString(self.encoded_model)
-        layer_counter = 0
+        return self.manager.decode(self.encoded_model)
+        # # initialize the layer list, parse the string
+        # model_layers = []
+        # encoded_layers = ModelLayers()
+        # encoded_layers.ParseFromString(self.encoded_model)
+        # layer_counter = 0
 
-        # for each type of layer encountered, parse its properties
-        for layer in encoded_layers.layers:
-            layer_counter += 1
-            layer_type = layer.type.pop(0)
-            if layer_type == Layer.LayerType.LINEAR:
-                lin_layer = encoded_layers.linearLayers.pop(0)
-                in_features = lin_layer.inFeatures.pop(0)
-                out_features = lin_layer.outFeatures.pop(0)
-                decoded_layer = nn.Linear(in_features, out_features)
-            elif layer_type == Layer.LayerType.RELU:
-                relu_layer = encoded_layers.reluLayers.pop(0)
-                inplace = relu_layer.inPlace.pop(0)
-                decoded_layer = nn.ReLU(inplace)
-            elif layer_type == Layer.LayerType.LOGSOFTMAX:
-                logsoftmax_layer = encoded_layers.logsoftmaxLayers.pop(0)
-                decoded_layer = nn.LogSoftmax(logsoftmax_layer.dim.pop(0))
-            else:
-                print(f"Error: Encountered layer without available conversion {layer_type}. Please consult layers.proto file. Exiting.")
-                exit(1)
-            model_layers.append(decoded_layer)
+        # # for each type of layer encountered, parse its properties
+        # for layer in encoded_layers.layers:
+        #     layer_counter += 1
+        #     layer_type = layer.type.pop(0)
+        #     if layer_type == Layer.LayerType.LINEAR:
+        #         lin_layer = encoded_layers.linearLayers.pop(0)
+        #         in_features = lin_layer.inFeatures.pop(0)
+        #         out_features = lin_layer.outFeatures.pop(0)
+        #         decoded_layer = nn.Linear(in_features, out_features)
+        #     elif layer_type == Layer.LayerType.RELU:
+        #         relu_layer = encoded_layers.reluLayers.pop(0)
+        #         inplace = relu_layer.inPlace.pop(0)
+        #         decoded_layer = nn.ReLU(inplace)
+        #     elif layer_type == Layer.LayerType.LOGSOFTMAX:
+        #         logsoftmax_layer = encoded_layers.logsoftmaxLayers.pop(0)
+        #         decoded_layer = nn.LogSoftmax(logsoftmax_layer.dim.pop(0))
+        #     else:
+        #         print(f"Error: Encountered layer without available conversion {layer_type}. Please consult layers.proto file. Exiting.")
+        #         exit(1)
+        #     model_layers.append(decoded_layer)
 
-        # check for model depth being consistent with layers decoded
-        assert layer_counter == len(model_layers)
-        return model_layers
+        # # check for model depth being consistent with layers decoded
+        # assert layer_counter == len(model_layers)
+        # return model_layers
 
 
 if __name__ == "__main__":

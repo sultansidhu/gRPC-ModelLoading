@@ -10,6 +10,7 @@ import torch.optim as optim
 
 # Imports for layer types.
 from proto.python.proto.layers.layers_pb2 import ModelLayers, Layer
+from onnx_manager.onnx_manager import ONNXManager
 from decoder.decoder import ProtoDecoder
 
 class ProtoEncoder:
@@ -20,6 +21,7 @@ class ProtoEncoder:
         self.model = model
         self.optim = optim
         self.loss = loss
+        self.manager = ONNXManager()
 
     def encode_layer(self, layer:nn.Module, layers:ModelLayers) -> Layer:
         """
@@ -56,19 +58,15 @@ class ProtoEncoder:
             exit(1)
         return layer_proto
 
-    def encode_model_layers(self) -> str:
+    def encode_model_layers(self) -> bytes:
         """
         A function that encodes a given PyTorch model's layers using Protobuf.
 
         Returns:
-            str: An encoded byte-string which contains within it information regarding
-            the layers of the encoded model. 
+            bytes: An encoded byte-string which contains within it information regarding
+            the layers of the encoded model. Encoded as ONNX.
         """
-        layers = ModelLayers()
-        for layer in self.model.children():
-            encoded_layer = self.encode_layer(layer, layers)
-            layers.layers.append(encoded_layer)
-        return layers.SerializeToString()
+        return self.manager.encode(self.model, (28*28, 28*28))
 
 
 
