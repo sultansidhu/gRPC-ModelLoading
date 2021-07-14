@@ -98,14 +98,3 @@ class ONNXManager:
             model: The ONNX model to be trained.
         """
         raise NotImplementedError()
-
-
-if __name__ == "__main__":
-    net = Net()
-    dummy_input = torch.randn((28*28, 28*28))
-    manager = ONNXManager()
-
-    print(net)
-    model_bytes = manager.encode(net, dummy_input)
-    torch_model = manager.decode(model_bytes)
-    print(torch_model)
