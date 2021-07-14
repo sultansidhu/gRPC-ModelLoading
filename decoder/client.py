@@ -1,6 +1,7 @@
 import grpc
 import proto.python.proto.service.service_pb2_grpc as pb2_grpc
 import proto.python.proto.service.service_pb2 as pb2
+import onnx
 
 from decoder import ProtoDecoder
 
@@ -36,4 +37,5 @@ class ModelEncodeClient(object):
 if __name__ == '__main__':
     client = ModelEncodeClient()
     decoded_model = client.get_url(message="") # empty message, since the server does not need it
-    print(decoded_model)
+    onnx.onnx.checker.check_model(decoded_model)
+    print("model decoded!")
