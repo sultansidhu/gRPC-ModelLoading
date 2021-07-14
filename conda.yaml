@@ -9,6 +9,7 @@ dependencies:
     - torch
     - numpy
     - torchvision
+    - onnx2pytorch
     - grpcio
     - grpcio-tools
 prefix: /Users/sultansidhu/opt/miniconda3/envs/fledge-proto
