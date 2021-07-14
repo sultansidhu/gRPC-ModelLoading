@@ -9,8 +9,6 @@ import torch
 import torch.nn as nn
 import torch.onnx
 import onnx
-from onnx2pytorch import ConvertModel
-
 
 class Net(nn.Module):
     """
@@ -66,22 +64,41 @@ class ONNXManager:
     def decode(self, model: bytes):
         """
         Function for decoding the received bytestring of the encoded ONNX model. 
-        Decodes it back into a PyTorch model. 
+        Decodes it back into a ONNX model. 
 
         Args:
             model (bytes): bytestring containing the model description and parameters. 
 
         Returns:
-            nn.Module: The decoded PyTorch model. 
+            ONNX Model: The decoded ONNX model. 
         """
         _, path = tempfile.mkstemp()
         with open(path, "wb") as fd:
             fd.write(model)
         onnx_model = onnx.load(path)
-        pytorch_model = ConvertModel(onnx_model)
         os.remove(path)
-        return pytorch_model
-        
+        return onnx_model
+
+    def inference(self, model, dummy_input):
+        """
+        An inference function, that invokes the onnx model on dummy input.
+        Can be used for comparison against a model sent over the network and decrypted.
+
+        Args:
+            model: ONNX model used for inference
+            dummy_input: The dummy input to invoke the model on
+        """
+        raise NotImplementedError()
+
+    def train(self, model):
+        """
+        A function to train the ONNX model on the client side. 
+
+        Args:
+            model: The ONNX model to be trained.
+        """
+        raise NotImplementedError()
+
 
 if __name__ == "__main__":
     net = Net()
