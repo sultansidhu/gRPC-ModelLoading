@@ -1,4 +1,4 @@
-# gRPC-ModelLoading
+# gRPC-PyTorch
 ## Implementation Plan
 ### Overarching Desired Features 
 - Simple API to use with ML Models
